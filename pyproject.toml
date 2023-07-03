@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = "Basic project to integrate with Virbe Dashboard through custom conversational engine using FastAPI"
+authors = ["Chris Wrobel <chris@virbe.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.99.1"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
