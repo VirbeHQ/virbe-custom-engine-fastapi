@@ -1,8 +1,7 @@
-from typing import Optional
-
-from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional, List, Any
+
+from pydantic import BaseModel, Field
 
 
 class ChatRequestUserAction(BaseModel):
@@ -111,6 +110,18 @@ class RoomConversationRequest(BaseModel):
 
 class RoomConversationResponse(BaseModel):
     action: Optional[RoomMessageAction] = None
+
+    class Config:
+        allow_population_by_field_name = True
+        partial = True
+
+
+class RoomMessageIngest(BaseModel):
+    reply_to_message_id: Optional[str] = Field(alias="replyTo")
+    action: Optional[RoomMessageAction] = Field(alias="action")
+    # end_user_id is used only when RoomEnduserStore is needed
+    end_user_id: Optional[str] = Field(alias="endUserId")
+    sender_id: str = Field(alias="senderId", default="custom-chatbot-async")
 
     class Config:
         allow_population_by_field_name = True
